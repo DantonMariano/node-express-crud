@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Tarefas</title>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row pt-3">
+        <div class="col" align="center">
+          <h1>Lista de Tarefas</h1>
+          <form action="/tarefa" method="POST" class='col-7'>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Tarefa</label>
+              <input required type="text" class="form-control" name="tarefa" placeholder="Titulo da Tarefa">
+            </div>
+            <div class="mb-3">
+              <textarea required class="form-control" name="desc" rows="3" placeholder="Sua tarefa aqui!"></textarea>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+              <h4 style='margin-right: 15px;'> Prazo: </h4><input required type="date" name="data" style='padding:5px 15px 5px 15px; border-radius:20px; border:none; box-shadow:0 0 3px rgba(0,0,0,0.4);'>
+            </div>
+            <button style='width:100%' class="btn btn-primary" type='submit'>Enviar</button>
+          </form>
+          <hr>
+          <% if (data.query.length > 0) { %>
+          <div class="d-flex p-2 flex-wrap justify-content-between">
+            <% data.query.forEach(el => { %>
+            <div class="card mb-3" style="width: 34rem">
+              <div class="card-body" id="<%= el.id %>">
+                <h5 class="card-title"><%= el.tarefa %></h5>
+                <p class="card-text"><%= el.desc %></p>
+                <a href="#" class="btn btn-secondary disabled"><%= el.prazo %></a><br>
+                <sub><%= el.created_at %></sub>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
